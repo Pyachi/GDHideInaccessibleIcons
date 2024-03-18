@@ -3,6 +3,7 @@
 using namespace geode::prelude;
 
 gd::string text;
+std::unordered_map<UnlockType, std::unordered_map<int, bool>> mapCachedIconStatuses;
 
 #include <Geode/modify/GJGarageLayer.hpp>
 class $modify(UpdatedGarageLayer, GJGarageLayer)
@@ -50,10 +51,21 @@ class $modify(UpdatedGarageLayer, GJGarageLayer)
                         default:
                             return;
                     }
-                    ItemInfoPopup::create(itemNode->getTag(), unlockType)->removeMeAndCleanup();
-                    if (std::strstr(text.data(), "2.21") != nullptr)
+                    if (mapCachedIconStatuses[unlockType].contains(itemNode->getTag()))
                     {
-                        itemsToRemove.push_back(itemNode);
+                        if (!mapCachedIconStatuses[
+                            unlockType][itemNode->getTag()])
+                            itemsToRemove.push_back(itemNode);
+                    }
+                    else
+                    {
+                        ItemInfoPopup::create(itemNode->getTag(), unlockType)->removeMeAndCleanup();
+                        if (std::strstr(text.data(), "2.21") != nullptr)
+                        {
+                            mapCachedIconStatuses[unlockType][itemNode->getTag()] = false;
+                            itemsToRemove.push_back(itemNode);
+                        }
+                        else mapCachedIconStatuses[unlockType][itemNode->getTag()] = true;
                     }
                 }
                 for (CCNode *item: itemsToRemove) item->removeMeAndCleanup();

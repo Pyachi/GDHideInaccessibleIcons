@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(Hide2.21Icons VERSION 1.0.0)
+project(Hide2.21Icons VERSION 1.0.1)
 
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp
