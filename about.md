@@ -6,5 +6,5 @@ Get rid of those pesky icons that just tease you with their awesome designs and 
 
 ## TODO
 
-- Remove gaps in between icons and reduce page count to match.
+- Reduce page count to match new icon count.
 - Figure out how to check for unlock conditions without expensive internal calls every time.
