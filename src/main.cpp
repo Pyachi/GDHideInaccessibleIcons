@@ -9,6 +9,9 @@ std::unordered_map<UnlockType, std::unordered_map<int, bool>> mapCachedIconStatu
 
 class $modify(UpdatedGarageLayer, GJGarageLayer) {
     [[maybe_unused]] CCArray *getItems(int itemCount, int page, IconType iconType, int selectedTag) {
+        if (static_cast<int>(iconType) > 7) {
+            return GJGarageLayer::getItems(itemCount, page, iconType, selectedTag);
+        }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Get list of all icons
         CCArray *allItems{new CCArray};
